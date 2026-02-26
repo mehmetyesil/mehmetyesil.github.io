@@ -1,21 +1,707 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Personal Website</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mehmet Yesil - Academic CV</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
             text-align: center;
         }
-        h1 { color: #333; }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            font-size: 0.95em;
+        }
+
+        .contact-info span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px dotted rgba(255,255,255,0.5);
+        }
+
+        .contact-info a:hover {
+            border-bottom: 1px solid white;
+        }
+
+        /* Content Sections */
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 20px;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            color: #764ba2;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            font-size: 1.3em;
+        }
+
+        /* Experience & Education Items */
+        .item {
+            margin-bottom: 20px;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 5px;
+        }
+
+        .item-title {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .item-subtitle {
+            font-style: italic;
+            color: #666;
+        }
+
+        .item-date {
+            color: #764ba2;
+            font-weight: 500;
+        }
+
+        .item-location {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .item-description {
+            color: #555;
+            margin-top: 5px;
+            padding-left: 20px;
+        }
+
+        /* Publications */
+        .publication-list {
+            list-style: none;
+        }
+
+        .publication-list li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .publication-list li:before {
+            content: "•";
+            color: #764ba2;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .publication-link {
+            color: #667eea;
+            text-decoration: none;
+            word-break: break-all;
+            font-size: 0.9em;
+        }
+
+        .publication-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Teaching Grid */
+        .teaching-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .teaching-semester {
+            background-color: #f8f4ff;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .teaching-semester h4 {
+            color: #764ba2;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #e0d0ff;
+            padding-bottom: 5px;
+        }
+
+        .teaching-semester ul {
+            list-style: none;
+        }
+
+        .teaching-semester li {
+            margin-bottom: 5px;
+            font-size: 0.95em;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .teaching-semester li:before {
+            content: "▹";
+            color: #764ba2;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Talks & Events */
+        .talks-list {
+            list-style: none;
+        }
+
+        .talks-list li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            font-size: 0.95em;
+        }
+
+        .talks-list li:before {
+            content: "▹";
+            color: #764ba2;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Skills & Interests */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category h4 {
+            color: #764ba2;
+            margin-bottom: 10px;
+        }
+
+        .skill-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background-color: #f0e8ff;
+            color: #764ba2;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        /* References */
+        .references-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .reference-item {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .reference-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .reference-title {
+            font-style: italic;
+            color: #666;
+            font-size: 0.9em;
+            margin: 5px 0;
+        }
+
+        .reference-email {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9em;
+            word-break: break-all;
+        }
+
+        .reference-email:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .item-header {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background-color: white;
+            }
+            
+            .container {
+                margin: 0;
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .header {
+                background: #764ba2;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            .section-title {
+                color: #764ba2;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Welcome to My Website!</h1>
-    <p>This is my personal page hosted on GitHub.</p>
-    <p>I'm learning to build websites!</p>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>MEHMET YESIL</h1>
+            <div class="subtitle">Assistant Professor of Mathematics</div>
+            <div class="contact-info">
+                <span>📍 Batman University, Department of Mathematics</span>
+                <span>📧 <a href="mailto:mehmet-yesil@outlook.com">mehmet-yesil@outlook.com</a></span>
+                <span>📧 <a href="mailto:mehmet.yesil@batman.edu.tr">mehmet.yesil@batman.edu.tr</a></span>
+                <span>📞 <a href="tel:+905061029346">+90 506 102 9346</a></span>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Work Experience -->
+            <div class="section">
+                <div class="section-title">
+                    <span>💼</span> WORK EXPERIENCE
+                </div>
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">Assistant Professor (teaching-focused)</span>
+                        <span class="item-date">July 2021 - Present</span>
+                    </div>
+                    <div class="item-location">Department of Mathematics, Batman University</div>
+                </div>
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">Visiting Researcher</span>
+                        <span class="item-date">Jan - May 2025</span>
+                    </div>
+                    <div class="item-location">Mathematics Center, University of Porto</div>
+                </div>
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">Lecturer</span>
+                        <span class="item-date">Jan - Sep 2024</span>
+                    </div>
+                    <div class="item-location">Department of Mathematics and Statistics, Maynooth University</div>
+                </div>
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">Assistant Lecturer</span>
+                        <span class="item-date">Jan - Jun 2023</span>
+                    </div>
+                    <div class="item-location">Department of Mathematics and Statistics, Maynooth University</div>
+                </div>
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">Teaching Fellow</span>
+                        <span class="item-date">Aug 2019 - Jul 2021</span>
+                    </div>
+                    <div class="item-location">Department of Mathematics, Batman University</div>
+                </div>
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">Mathematics Teacher</span>
+                        <span class="item-date">Sep 2010 - Sep 2011</span>
+                    </div>
+                    <div class="item-location">Profesyonel Matematik-Fen Dershanesi, Mersin, Turkey</div>
+                </div>
+            </div>
+
+            <!-- Career Note -->
+            <div class="section">
+                <div class="section-title">
+                    <span>📌</span> CAREER NOTE
+                </div>
+                <div class="item-description">
+                    Unpaid Paternity leave, Batman University, Jan 2023 - June 2025. During this period, I tried to remain in academia and held lecturing positions at Maynooth University and visiting researcher position at the University of Porto.
+                </div>
+            </div>
+
+            <!-- Education -->
+            <div class="section">
+                <div class="section-title">
+                    <span>🎓</span> EDUCATION
+                </div>
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">PhD in Pure Mathematics</span>
+                        <span class="item-date">Jan 2015 - Jan 2019</span>
+                    </div>
+                    <div class="item-location">University of Sheffield</div>
+                    <div class="item-description">Thesis: "Constructive Methods for Frobenius and Cartier Maps" (November 2018)<br>Supervisor: Dr. Mordechai Katzman</div>
+                </div>
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">MSc in Mathematics</span>
+                        <span class="item-date">Sep 2011 - Jul 2014</span>
+                    </div>
+                    <div class="item-location">Izmir Institute of Technology</div>
+                    <div class="item-description">GPA: 3.07/4<br>Thesis: "Approximation Theorems for Krull Domains" (July 2014)<br>Supervisor: Prof. Dr. Başak Ay Saylam</div>
+                </div>
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">Pedagogic Proficiency (Qualified Teacher Status)</span>
+                        <span class="item-date">Oct 2011 - May 2012</span>
+                    </div>
+                    <div class="item-location">Buca Education Faculty, Dokuz Eylul University</div>
+                </div>
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">BSc(Hons) in Mathematics</span>
+                        <span class="item-date">Sep 2006 - Jul 2010</span>
+                    </div>
+                    <div class="item-location">Dokuz Eylul University</div>
+                    <div class="item-description">GPA: 3.03/4<br>BSc Project: "Hurwitz Theorem on Real Normed Algebras" (December 2009)</div>
+                </div>
+                <div class="item">
+                    <div class="item-header">
+                        <span class="item-title">English Prep Year</span>
+                        <span class="item-date">Sep 2005 - Jul 2006</span>
+                    </div>
+                    <div class="item-location">Dokuz Eylul University</div>
+                </div>
+            </div>
+
+            <!-- Research Interests -->
+            <div class="section">
+                <div class="section-title">
+                    <span>🔬</span> RESEARCH INTERESTS
+                </div>
+                <div class="skill-items">
+                    <span class="skill-tag">Commutative Algebra</span>
+                    <span class="skill-tag">Prime Characteristic Methods</span>
+                    <span class="skill-tag">Local Cohomology</span>
+                    <span class="skill-tag">Homological Algebra</span>
+                    <span class="skill-tag">Numerical Semigroups</span>
+                    <span class="skill-tag">Numerical Semigroup Rings</span>
+                    <span class="skill-tag">Young Diagrams</span>
+                </div>
+            </div>
+
+            <!-- Papers and Preprints -->
+            <div class="section">
+                <div class="section-title">
+                    <span>📝</span> PAPERS AND PREPRINTS
+                </div>
+                <ul class="publication-list">
+                    <li>Young Diagrams of Almost Symmetric Numerical Semigroups of Type Three, <em>preprint in preparation</em></li>
+                    <li>On the Young Diagrams of Almost Symmetric Numerical Semigroups, with Manuel Delgado and Meral Suer, <em>preprint in preparation</em></li>
+                    <li>Young Diagram Decompositions for Almost Symmetric Numerical Semigroups<br><a href="https://doi.org/10.48550/arXiv.2504.20688" class="publication-link" target="_blank">https://doi.org/10.48550/arXiv.2504.20688</a></li>
+                    <li>Special Subdiagrams of Young Diagrams and Numerical Semigroups, with Meral Suer<br><em>Turkish Journal of Mathematics</em> - <a href="https://doi.org/10.55730/1300-0098.3510" class="publication-link" target="_blank">https://doi.org/10.55730/1300-0098.3510</a></li>
+                    <li>Row-Factorization Matrices in Arf Numerical Semigroups and Defining Ideals, with Meral Suer<br><em>Semigroup Forum</em> - <a href="https://doi.org/10.1007/s00233-024-10416-y" class="publication-link" target="_blank">https://doi.org/10.1007/s00233-024-10416-y</a></li>
+                    <li>Symmetric and Pseudo-Symmetric Numerical Semigroups via Young Diagrams and their Semigroup Rings, with Meral Suer<br><em>Journal of the Korean Mathematical Society</em> - <a href="https://doi.org/10.4134/JKMS.j210007" class="publication-link" target="_blank">https://doi.org/10.4134/JKMS.j210007</a></li>
+                    <li>A Generalization of the Katzman-Zhang Algorithm<br><em>Journal of Symbolic Computation</em> - <a href="https://doi.org/10.1016/j.jsc.2019.12.005" class="publication-link" target="_blank">https://doi.org/10.1016/j.jsc.2019.12.005</a></li>
+                    <li>Annihilators of Cartier Quotients<br><em>Journal of Algebra and its Applications</em> - <a href="https://doi.org/10.1142/S0219498821501000" class="publication-link" target="_blank">https://doi.org/10.1142/S0219498821501000</a></li>
+                    <li>An Explicit Version of the Correspondence between Noetherian Modules with Cartier Maps and Artinian Modules with Frobenius Maps<br><em>Hacettepe Journal of Mathematics and Statistics</em> - <a href="https://doi.org/10.15672/hujms.559956" class="publication-link" target="_blank">https://doi.org/10.15672/hujms.559956</a></li>
+                </ul>
+            </div>
+
+            <!-- Grants and External Fundings -->
+            <div class="section">
+                <div class="section-title">
+                    <span>💰</span> GRANTS AND EXTERNAL FUNDINGS
+                </div>
+                <ul class="publication-list">
+                    <li>12 months project grant from TÜBİTAK for project "Sub-diagrams of Young Diagrams of Numerical Semigroups" (Project No: 122F475, co-authored with Meral Suer)</li>
+                    <li>Erasmus+ programme grant for a week visit to University College Cork</li>
+                    <li>International Scholarship Programme for Postgraduate Education, Ministry of National Education, Turkey</li>
+                    <li>National Scholarship Programme for Undergraduate Education, Ministry of Youth and Sports, Turkey</li>
+                </ul>
+            </div>
+
+            <!-- Current Teaching -->
+            <div class="section">
+                <div class="section-title">
+                    <span>📚</span> CURRENT TEACHING
+                </div>
+                <div class="teaching-grid">
+                    <div class="teaching-semester">
+                        <h4>Spring 2026</h4>
+                        <ul>
+                            <li>Number Theory</li>
+                            <li>Abstract Algebra I</li>
+                            <li>Reading and Speaking in English</li>
+                            <li>Technical English I</li>
+                            <li>Commutative Algebra I (Postgraduate)</li>
+                            <li>Introduction to Homological Algebra I (Postgraduate)</li>
+                        </ul>
+                    </div>
+                    <div class="teaching-semester">
+                        <h4>Fall 2025</h4>
+                        <ul>
+                            <li>Module Theory</li>
+                            <li>Final Year Project in Cryptology</li>
+                            <li>Abstract Algebra II</li>
+                            <li>English for Career</li>
+                            <li>Technical English II</li>
+                            <li>Commutative Algebra II (Postgraduate)</li>
+                            <li>Introduction to Homological Algebra II (Postgraduate)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Previous Teaching -->
+            <div class="section">
+                <div class="section-title">
+                    <span>📖</span> PREVIOUS TEACHING
+                </div>
+                <div class="teaching-grid">
+                    <div class="teaching-semester">
+                        <h4>Spring 2024 (Maynooth)</h4>
+                        <ul>
+                            <li>Integration</li>
+                            <li>Cryptography</li>
+                            <li>Reading Course in Numerical Semigroups</li>
+                        </ul>
+                    </div>
+                    <div class="teaching-semester">
+                        <h4>Spring 2023 (Maynooth)</h4>
+                        <ul>
+                            <li>Integration</li>
+                            <li>Cryptography</li>
+                            <li>Rings and Fields 2</li>
+                            <li>Reading Course in Module Theory</li>
+                        </ul>
+                    </div>
+                    <div class="teaching-semester">
+                        <h4>Fall 2022 (Batman)</h4>
+                        <ul>
+                            <li>Introduction to Topology</li>
+                            <li>Abstract Algebra I</li>
+                            <li>Complex Analysis I</li>
+                            <li>Technical English I</li>
+                            <li>Commutative Algebra I</li>
+                            <li>Introduction to Homological Algebra</li>
+                        </ul>
+                    </div>
+                    <div class="teaching-semester">
+                        <h4>Spring 2022 (Batman)</h4>
+                        <ul>
+                            <li>Analytic Geometry II</li>
+                            <li>Abstract Algebra II</li>
+                            <li>Technical English II</li>
+                            <li>Commutative Algebra II</li>
+                            <li>Introduction to Homological Algebra</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service Teaching -->
+            <div class="section">
+                <div class="section-title">
+                    <span>⚙️</span> SERVICE TEACHING
+                </div>
+                <ul class="talks-list">
+                    <li>Mathematics II (Calculus 2) - Computer Engineering (Spring 2022)</li>
+                    <li>Linear Algebra - Electrical and Electronics Engineering (Fall 2020, 2021, 2022)</li>
+                    <li>Engineering Mathematics I (Linear Algebra) - Civil Engineering (Fall 2020, 2021)</li>
+                    <li>Mathematics II (Calculus 2) - Civil Engineering (Spring 2020, 2021)</li>
+                    <li>Engineering Mathematics II (Linear Algebra) - Computer Engineering (Spring 2020, 2022)</li>
+                </ul>
+            </div>
+
+            <!-- Given and Scheduled Talks -->
+            <div class="section">
+                <div class="section-title">
+                    <span>🎤</span> GIVEN AND SCHEDULED TALKS
+                </div>
+                <ul class="talks-list">
+                    <li>"Young Diagrams of Almost Symmetric Numerical Semigroups" - 37th National Mathematics Symposium, Akdeniz University, 1-4 September 2025</li>
+                    <li>"A Decomposition of Symmetric Numerical Semigroups" - IIIMT Algebra Forum Conference, Karaman University, 24-26 June 2025</li>
+                    <li>"Young Diagram Decompositions for Almost Symmetric Numerical Semigroups" - University of Porto Algebra Seminar, 14 May 2025</li>
+                    <li>"Special Subdiagrams of Young Diagrams" - International Meeting on Numerical Semigroups, Universidad de Cadiz, 8-12 July 2024</li>
+                    <li>"National and International Scholarships" - Batman University, 20 December 2022</li>
+                    <li>Poster: "Row-Factorization Matrices of Arf Numerical Semigroups" - EMS Summer School, Gebze Technical University, 8-12 August 2022</li>
+                    <li>"What can we do after studying Mathematics?" - Batman High School of Social Sciences, 9 June 2022</li>
+                    <li>"Annihilators of Cartier Quotients" - Sirince Commutative Algebra Workshop, Nesin Mathematics Village, 20-23 May 2019</li>
+                    <li>"An Explicit Correspondence between Noetherian Modules..." - Izmir Institute of Technology, 14 December 2018</li>
+                    <li>"Annihilators of Cartier Quotients" - Dokuz Eylul University, 12 December 2018</li>
+                </ul>
+            </div>
+
+            <!-- Attended Events -->
+            <div class="section">
+                <div class="section-title">
+                    <span>🎪</span> ATTENDED EVENTS
+                </div>
+                <ul class="talks-list">
+                    <li>Masterclass on Derived Category Methods in Ring Theory - Aarhus University, Denmark, 13-16 August 2024</li>
+                    <li>EMS Summer School on Combinatorial Commutative Algebra - Gebze Technical University, 8-12 August 2022</li>
+                    <li>Local cohomology and related topics - KTH Royal Institute of Technology, Stockholm, 1-5 August 2022</li>
+                    <li>Erasmus+ Programme - University College Cork, Ireland, 20-26 June 2022</li>
+                    <li>The 17th (Virtual) Seminar on Commutative Algebra and Related Topics - IPM, Iran, 6-8 January 2021</li>
+                    <li>Commutative Algebra Conference - University of Minnesota, USA, 7-11 August 2017</li>
+                    <li>Commutative Algebra Conference - University of Michigan, USA, 7-12 July 2016</li>
+                    <li>Turkish Mathematics Society Summer School - Nesin Mathematics Village, 24 Aug - 6 Sep 2015</li>
+                    <li>3rd Workshop on Rings, Modules and Algebras - Izmir Institute of Technology, 23-27 July 2014</li>
+                    <li>Turkish Mathematics Society Summer School - Nesin Mathematics Village, 15 July - 8 August 2013</li>
+                    <li>2nd Workshop on Rings, Modules and Algebras - Izmir Institute of Technology, 24-28 June 2013</li>
+                    <li>Izmir Algebraic Geometric Topology Days - Dokuz Eylul University, 12-16 January 2009</li>
+                </ul>
+            </div>
+
+            <!-- Personal Interests and Skills -->
+            <div class="section">
+                <div class="section-title">
+                    <span>🌟</span> PERSONAL INTERESTS AND SKILLS
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h4>Languages</h4>
+                        <div class="skill-items">
+                            <span class="skill-tag">Turkish (Native)</span>
+                            <span class="skill-tag">English (Fluent)</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Computer Skills</h4>
+                        <div class="skill-items">
+                            <span class="skill-tag">GitHub</span>
+                            <span class="skill-tag">GAP</span>
+                            <span class="skill-tag">Ubuntu OS</span>
+                            <span class="skill-tag">Microsoft Office</span>
+                            <span class="skill-tag">LaTeX</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Hobbies</h4>
+                        <div class="skill-items">
+                            <span class="skill-tag">Charcoal Drawing</span>
+                            <span class="skill-tag">Coin Collection</span>
+                            <span class="skill-tag">Paper Money Collection</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- References -->
+            <div class="section">
+                <div class="section-title">
+                    <span>👥</span> REFERENCES
+                </div>
+                <div class="references-grid">
+                    <div class="reference-item">
+                        <div class="reference-name">Assoc. Prof. Dr. Manuel Delgado</div>
+                        <div class="reference-title">Department of Mathematics, University of Porto</div>
+                        <a href="mailto:mdelgado@fc.up.pt" class="reference-email">mdelgado@fc.up.pt</a>
+                    </div>
+                    <div class="reference-item">
+                        <div class="reference-name">Assoc. Prof. Dr. Meral Süer</div>
+                        <div class="reference-title">Department of Mathematics, Batman University</div>
+                        <a href="mailto:meral.suer@batman.edu.tr" class="reference-email">meral.suer@batman.edu.tr</a>
+                    </div>
+                    <div class="reference-item">
+                        <div class="reference-name">Dr. Mordechai Katzman</div>
+                        <div class="reference-title">School of Mathematics and Statistics, University of Sheffield</div>
+                        <a href="mailto:m.katzman@sheffield.ac.uk" class="reference-email">m.katzman@sheffield.ac.uk</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
